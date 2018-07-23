@@ -1,6 +1,19 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from rest_framework import status
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from django.shortcuts import render
+from .serializers import RegistrationSerializer
 
-# Create your views here.
+
+class RegistrationAPIView(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = RegistrationSerializer
+
+    def post(self, request):
+        user = request.data.get('user', {})
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
