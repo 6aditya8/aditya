@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-     url(r'^api/', include('jwt_auth.authentication.urls', namespace='authentication')),
+     url(r'^api/', include('authentication.urls', namespace='authentication')),
 ]
