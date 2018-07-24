@@ -41,6 +41,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = UserSerializer
 
     def retrieve(self, request, *args, **kwargs):
+        print('asdfsdfsadf')
         serializer = self.serializer_class(request.user)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
